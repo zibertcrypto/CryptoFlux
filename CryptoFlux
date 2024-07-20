@@ -1,0 +1,21 @@
+# scripts/price_tracking.py
+
+import requests
+
+def get_price(crypto_symbol, currency='USD'):
+    """
+    Get the current price of a cryptocurrency.
+
+    :param crypto_symbol: Symbol of the cryptocurrency (e.g., 'BTC')
+    :param currency: Currency to convert to (default: 'USD')
+    :return: Current price of the cryptocurrency
+    """
+    url = f'https://api.coingecko.com/api/v3/simple/price?ids={crypto_symbol}&vs_currencies={currency}'
+    response = requests.get(url)
+    data = response.json()
+    price = data.get(crypto_symbol, {}).get(currency, None)
+    return price
+
+# Example usage:
+# price = get_price('bitcoin')
+# print(f'Current Bitcoin price: ${price}')
